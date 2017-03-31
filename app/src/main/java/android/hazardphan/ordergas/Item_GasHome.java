@@ -12,19 +12,20 @@ public class Item_GasHome {
     private String tenchucuahang;
     private String diadiem;
     private String latlng;
-    private int anh;
+    private String link;
 
     public Item_GasHome() {
     }
 
-    public Item_GasHome(String tencuahang, String motagia, String sodienthoai, String diadiem) {
+    public Item_GasHome(String tencuahang, String motagia, String sodienthoai, String diadiem,String link) {
         this.tencuahang = tencuahang;
         this.motagia = motagia;
         this.sodienthoai = sodienthoai;
         this.diadiem = diadiem;
+        this.link = link;
     }
 
-    public Item_GasHome(String tencuahang, String loaigas, String motagia, String sodienthoai, String tenchucuahang, String diadiem, String latlng, int anh) {
+    public Item_GasHome(String tencuahang, String loaigas, String motagia, String sodienthoai, String tenchucuahang, String diadiem, String latlng, String link) {
         this.tencuahang = tencuahang;
         this.loaigas = loaigas;
         this.motagia = motagia;
@@ -32,7 +33,7 @@ public class Item_GasHome {
         this.tenchucuahang = tenchucuahang;
         this.diadiem = diadiem;
         this.latlng = latlng;
-        this.anh = anh;
+        this.link = link;
     }
 
     public String getTencuahang() {
@@ -91,11 +92,11 @@ public class Item_GasHome {
         this.latlng = latlng;
     }
 
-    public int getAnh() {
-        return anh;
+    public String getLink() {
+        return link;
     }
 
-    public void setAnh(int anh) {
-        this.anh = anh;
+    public void setLink(String link) {
+        this.link = link;
     }
 }

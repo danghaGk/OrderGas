@@ -27,6 +27,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class Home_Fragment extends Fragment {
+    ArrayList<Item_GasHome> ds;
     private String url = "http://goigas.96.lt/cuahang/get_all_cuahang.php";
     private RecyclerView recyclerView;
     private  RecyclerViewAdapter adapter;
@@ -43,7 +44,22 @@ public class Home_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.home_fragment, container, false);
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
+        adapter.setClickListener(new RecyclerViewAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
 
+            }
+
+            @Override
+            public void onItemLongClick(int position, View v) {
+
+            }
+
+            @Override
+            public void onItemContextClick(int position, View view) {
+
+            }
+        });
         return  v;
     }
 
@@ -75,7 +91,7 @@ public class Home_Fragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             dialog.dismiss();
-            ArrayList<Item_GasHome> ds = new ArrayList<>();
+             ds = new ArrayList<>();
             ArrayList<String> arrGas = new ArrayList<>();
             try {
                 JSONObject mangto = new JSONObject(s);
@@ -86,8 +102,8 @@ public class Home_Fragment extends Fragment {
                     String diachi =jsonObject.getString("diadiem");
                     String giatien =jsonObject.getString("motagia");
                     String sdt =jsonObject.getString("sdt");
-
-                    ds.add(new Item_GasHome(tencuahang,giatien,sdt,diachi));
+                    String link = jsonObject.getString("link_img");
+                    ds.add(new Item_GasHome(tencuahang,giatien,sdt,diachi,link));
                 }
                 adapter=new RecyclerViewAdapter(ds,getContext());
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());

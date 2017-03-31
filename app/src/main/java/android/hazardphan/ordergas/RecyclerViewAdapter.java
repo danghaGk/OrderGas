@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder>{
     private List<Item_GasHome> ds =new ArrayList<>();
     Context context;
-
+    private ClickListener clickListener;
     public RecyclerViewAdapter(List<Item_GasHome> ds, Context context) {
         this.ds = ds;
         this.context = context;
@@ -37,7 +39,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.txtDiaChi.setText(gas.getDiadiem());
         holder.txtGiaTien.setText(gas.getMotagia());
         holder.txtSDT.setText(gas.getSodienthoai());
-
+        String link = gas.getLink();
+        Glide.with(context)
+                .load(link)
+                .into(holder.imgCuaHang);
     }
 
     @Override
@@ -46,7 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     //class Viewholer
-    class RecyclerViewHolder extends RecyclerView.ViewHolder{
+    class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView txtTenCuaHang ,txtDiaChi,txtGiaTien,txtSDT;
         ImageView imgCuaHang;
         public RecyclerViewHolder(View v) {
@@ -56,7 +61,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             txtGiaTien= (TextView) v.findViewById(R.id.txtGiaTienHome);
             txtSDT= (TextView) v.findViewById(R.id.txtSDTHome);
             imgCuaHang= (ImageView) v.findViewById(R.id.imgHome);
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(clickListener!=null)
+                clickListener.onItemClick(getAdapterPosition(), v);
         }
     }
-
+    public interface ClickListener {
+        void onItemClick(int position, View v);
+        void onItemLongClick(int position, View v);
+        void onItemContextClick(int position,View view);
+    }
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
 }
