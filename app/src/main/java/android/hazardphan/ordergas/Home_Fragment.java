@@ -29,7 +29,6 @@ import java.util.ArrayList;
 public class Home_Fragment extends Fragment {
     private String url = "http://goigas.96.lt/cuahang/get_all_cuahang.php";
     private RecyclerView recyclerView;
-    private ArrayList<Item_GasHome> ds = new ArrayList<>();
     private  RecyclerViewAdapter adapter;
     ProgressDialog dialog;
 
@@ -76,6 +75,7 @@ public class Home_Fragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             dialog.dismiss();
+            ArrayList<Item_GasHome> ds = new ArrayList<>();
             ArrayList<String> arrGas = new ArrayList<>();
             try {
                 JSONObject mangto = new JSONObject(s);
